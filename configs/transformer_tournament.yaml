@@ -1,0 +1,34 @@
+experiment:
+  name: pubmed-rct-transformer-tournament
+  historical_f1: 0.8404
+
+data:
+  processed_dir: data/processed
+  train_split: train.csv
+  dev_split: dev.csv
+  test_split: test.csv
+  # Use null for the full split. Small values are useful for local smoke tests.
+  max_train_samples: null
+  max_eval_samples: null
+
+models:
+  modernbert:
+    checkpoint: answerdotai/ModernBERT-base
+  biomedbert:
+    checkpoint: microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext
+
+training:
+  seed: 42
+  epochs: 3
+  learning_rate: 0.00002
+  train_batch_size: 16
+  eval_batch_size: 32
+  weight_decay: 0.01
+  max_length: 256
+  gradient_accumulation_steps: 1
+  fp16: true
+  metric_for_best_model: macro_f1
+  early_stopping_patience: 1
+
+output:
+  root_dir: artifacts/transformer_tournament

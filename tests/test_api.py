@@ -1,0 +1,7 @@
+from fastapi.testclient import TestClient
+from clinical_intelligence.api.main import app
+
+def test_health():
+    r = TestClient(app).get("/health")
+    assert r.status_code == 200
+    assert r.json()["status"] == "ok"

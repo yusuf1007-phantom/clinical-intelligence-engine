@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - NER_MODEL=d4data/biomedical-ner-all
+    volumes:
+      - hf-cache:/root/.cache/huggingface
+volumes:
+  hf-cache:
